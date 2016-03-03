@@ -9,8 +9,6 @@
 Servo leftServo;
 Servo rightServo;
 
-double posLeft = 0;
-double posRight = 0;
 double leftSpeed = 0;
 double rightSpeed = 0;
 
@@ -70,10 +68,6 @@ void loop() {
       
     }  
   }
-  
-  
-    posLeft += leftSpeed;
-    posRight += rightSpeed;
     
     Serial.print("p");
     Serial.print(leftSpeed);
@@ -81,8 +75,6 @@ void loop() {
     Serial.print(rightSpeed);
     Serial.print("\n");
     
-    int posIntLeft = mod180((int) posLeft);
-    int posIntRight = mod180((int) posRight);
     leftServo.write((leftSpeed + 1) * 90); 
     rightServo.write(180-((rightSpeed + 1) * 90)); 
    // rightServo.write(90);
