@@ -16,6 +16,11 @@
 @interface JSViewController : UIViewController <JSDPadDelegate, JSButtonDelegate, JSAnalogueStickDelegate,
 CBCentralManagerDelegate, CBPeripheralDelegate>
 
+@property (strong, nonatomic) CBCentralManager *centralManager;
+@property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
+@property CBCharacteristic * characteristic;
+@property CBCharacteristic * resetChar;
+
 @property (weak, nonatomic) IBOutlet UILabel *directionlabel;
 @property (weak, nonatomic) IBOutlet UILabel *buttonLabel;
 @property (weak, nonatomic) IBOutlet UILabel *analogueLabel;
