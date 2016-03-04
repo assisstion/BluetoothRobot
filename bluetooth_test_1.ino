@@ -4,11 +4,12 @@
 #include <RBL_nRF8001.h>
 #include <Servo.h> 
 
-#define RED 3
-
+//Bluetooth Robot Arduino Code
+//The servos on the bluetooth robot
 Servo leftServo;
 Servo rightServo;
 
+//The speed of the servos
 double leftSpeed = 0;
 double rightSpeed = 0;
 
@@ -16,93 +17,71 @@ double rightSpeed = 0;
 
 void setup() {
   
+  //Attach the servos to their pins
   leftServo.attach(5);
   rightServo.attach(6);
   
-  // put your setup code here, to run once:
+  //Setup the Serial Peripheral Interface
   SPI.setDataMode(SPI_MODE0);
   SPI.setBitOrder(LSBFIRST);
   SPI.setClockDivider(SPI_CLOCK_DIV16);
   SPI.begin();
 
+  //Begins scanning for bluetooth
   ble_begin();
 
+  //Begins running the serial port on 57600 bits per second
   Serial.begin(57600);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly: 
-
-
-  /*if(ble_connected()){
-    digitalWrite(7,255); 
-
-  }*/
-
-   
-
   
+  //Read bluetooth data as long as there is remaining unread data
   while(ble_available()){
     
-    
-    
-    
+    //The bytes of data for the left and right motors
     byte left;
     byte right;
     
+    //If the data is present
     if(right = ble_read()){
-      //read the first number for the led to address, and the second for the value...
-
-     //val = ble_read();
-
+      //Read the right and left motor data
       left = ble_read();
       
-      
+      //Prints the data
       Serial.print(left);
       Serial.print(", ");
       Serial.print(right);
       Serial.print("\n");
       
+      //Converts the left and right speed from the bytes sent
       leftSpeed = byteToSpeed(left);
       rightSpeed = byteToSpeed(right);
       
     }  
   }
     
-    Serial.print("p");
-    Serial.print(leftSpeed);
-    Serial.print(", ");
-    Serial.print(rightSpeed);
-    Serial.print("\n");
+  Serial.print("p");
+  Serial.print(leftSpeed);
+  Serial.print(", ");
+  Serial.print(rightSpeed);
+  Serial.print("\n");
     
-    leftServo.write((leftSpeed + 1) * 90); 
-    rightServo.write(180-((rightSpeed + 1) * 90)); 
-   // rightServo.write(90);
-  /*if(digitalRead(4) == LOW){
-      Serial.println("HI");
-       ble_write('1'); 
-    }*/
-  
-  /*if (!ble_connected())
-  {
-    digitalWrite(7, LOW);
-
-    //analog_enabled = false;
-    //digitalWrite(DIGITAL_OUT_PIN, LOW);
-  }*/
+  //Writes the left speed to the servo, converting from speed to servo value
+  leftServo.write(speedToServoValue(leftSpeed)); 
+  //Right servo is reversed
+  rightServo.write(180 - speedToServoValue(rightSpeed)); 
   
   // Allow BLE Shield to send/receive data
   ble_do_events();
-  //digitalWrite(RED, LOW);
 }
 
+//Converts the byte read from bluetooth to the servo speed 
 double byteToSpeed(byte value){
   return (value - 128) / 127.0;
 }
 
-int mod180(int value){
-  while(value < 0){
-    value += 180;
-  }
-  return value % 180;
+//Converting from -1 to 1 (speed) -> 0 to 180 (servo value)
+double speedToServoValue(double value){
+  return (value + 1) * 90;
 }
