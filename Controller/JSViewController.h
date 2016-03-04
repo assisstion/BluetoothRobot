@@ -18,8 +18,7 @@ CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (strong, nonatomic) CBCentralManager *centralManager;
 @property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
-@property CBCharacteristic * characteristic;
-@property CBCharacteristic * resetChar;
+@property CBCharacteristic * writeCharacteristic;
 
 @property (weak, nonatomic) IBOutlet UILabel *directionlabel;
 @property (weak, nonatomic) IBOutlet UILabel *buttonLabel;
@@ -28,5 +27,6 @@ CBCentralManagerDelegate, CBPeripheralDelegate>
 @property (weak, nonatomic) IBOutlet JSButton *bButton;
 @property (weak, nonatomic) IBOutlet JSButton *aButton;
 @property (weak, nonatomic) IBOutlet JSAnalogueStick *analogueStick;
+@property NSMutableArray *pressedButtons;
 
 @end
