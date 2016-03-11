@@ -2,9 +2,9 @@
 //  JSAppDelegate.h
 //  Controller
 //
-//  Created by James Addyman on 28/03/2013.
-//  Copyright (c) 2013 James Addyman. All rights reserved.
 //
+// Much of the interface work done here was previously created by James Addyman(Jamsoft) and taken from his website and work.
+// His work has been edited and added to in order to serve our various functions. 
 
 #import <UIKit/UIKit.h>
 

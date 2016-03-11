@@ -2,8 +2,6 @@
 //  JSViewController.m
 //  Controller
 //
-//  Created by James Addyman on 28/03/2013.
-//  Copyright (c) 2013 James Addyman. All rights reserved.
 //
 // An app that transmit data from an iOS virtual controller to the robot via bluetooth.
 // Automatically scans for and connects to the bluetooth device.
@@ -13,6 +11,10 @@
 // http://code.tutsplus.com/tutorials/ios-7-sdk-core-bluetooth-practical-lesson--mobile-20741
 // http://embeddedsoftdev.blogspot.ca/p/ehal-nrf51.html
 // https://github.com/I-SYST/iOS/blob/master/BlinkyBle/BlinkyBle/ViewController.m
+// ^ Additional citations for where different concepts were learned and code was taken from. 
+// Much of the interface work done here was previously created by James Addyman(Jamsoft) and taken from his website and work.
+// His work has been edited and added to in order to serve our various functions.
+
 
 #import "JSViewController.h"
 #import "JSDPad.h"

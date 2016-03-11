@@ -2,8 +2,6 @@
 //  JSControlLayout.m
 //  Controller
 //
-//  Created by James Addyman on 04/04/2013.
-//  Copyright (c) 2013 James Addyman. All rights reserved.
 //
 
 #import "JSControlLayout.h"
