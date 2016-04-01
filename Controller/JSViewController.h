@@ -10,6 +10,13 @@
 #import "JSAnalogueStick.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <QuartzCore/QuartzCore.h>
+#import <CoreMotion/CoreMotion.h>
+double currentMaxAccelX;
+double currentMaxAccelY;
+double currentMaxAccelZ;
+double currentMaxRotX;
+double currentMaxRotY;
+double currentMaxRotZ;
 
 @interface JSViewController : UIViewController <JSDPadDelegate, JSButtonDelegate, JSAnalogueStickDelegate,
 CBCentralManagerDelegate, CBPeripheralDelegate>
@@ -17,6 +24,7 @@ CBCentralManagerDelegate, CBPeripheralDelegate>
 @property (strong, nonatomic) CBCentralManager *centralManager;
 @property (strong, nonatomic) CBPeripheral *discoveredPeripheral;
 @property CBCharacteristic * writeCharacteristic;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *directionlabel;
 @property (weak, nonatomic) IBOutlet UILabel *buttonLabel;
@@ -26,5 +34,8 @@ CBCentralManagerDelegate, CBPeripheralDelegate>
 @property (weak, nonatomic) IBOutlet JSButton *aButton;
 @property (weak, nonatomic) IBOutlet JSAnalogueStick *analogueStick;
 @property NSMutableArray *pressedButtons;
+
+
+@property (strong, nonatomic) CMMotionManager *motionManager;
 
 @end

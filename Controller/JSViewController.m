@@ -48,6 +48,28 @@ typedef struct
     
     self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     
+    currentMaxAccelX = 0;
+    currentMaxAccelY = 0;
+    currentMaxAccelZ = 0;
+    
+    currentMaxRotX = 0;
+    currentMaxRotY = 0;
+    currentMaxRotZ = 0;
+    self.motionManager = [[CMMotionManager alloc] init];
+    self.motionManager.accelerometerUpdateInterval = .2;
+    self.motionManager.gyroUpdateInterval = .2;
+    
+    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
+                                             withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
+                                                 [self outputAccelerationData:accelerometerData.acceleration];
+                                                 if(error){
+                                                     NSLog(@"%@", error);
+                                                 }
+                                             }];
+    
+    [self.motionManager startGyroUpdatesToQueue:[NSOperationQueue currentQueue]
+                                    withHandler:^(CMGyroData *gyroData, NSError *error) {[self outputRotationData:gyroData.rotationRate];}];
+    
     [[self.aButton titleLabel] setText:@"A"];
     [self.aButton setBackgroundImage:[UIImage imageNamed:@"button"]];
     [self.aButton setBackgroundImagePressed:[UIImage imageNamed:@"button-pressed"]];
@@ -62,7 +84,38 @@ typedef struct
     [self updateButtonLabel];
     [self updateAnalogueLabel];
 }
+//Motion Manager Functions
+-(void)outputAccelerationData:(CMAcceleration)acceleration
+{
+    NSLog(@"x - acceleration %@",[NSString stringWithFormat:@" %.2fg",acceleration.x]);
+    if(fabs(acceleration.x) > fabs(currentMaxAccelX))
+    {
+        currentMaxAccelX = acceleration.x;
+    }
+     NSLog(@"y-acceleration %@",[NSString stringWithFormat:@" %.2fg",acceleration.y]);
+    if(fabs(acceleration.y) > fabs(currentMaxAccelY))
+    {
+        currentMaxAccelY = acceleration.y;
+    }
+    NSLog(@"z-acceleration%@",[NSString stringWithFormat:@" %.2fg",acceleration.z]);
+    if(fabs(acceleration.z) > fabs(currentMaxAccelZ))
+    {
+        currentMaxAccelZ = acceleration.z;
+    }
+    
+    NSLog(@"maxx-accel%@",[NSString stringWithFormat:@" %.2f",currentMaxAccelX]);
+    NSLog(@"maxy-accel%@",[NSString stringWithFormat:@" %.2f",currentMaxAccelY]);
+    NSLog(@"maxz-accel%@",[NSString stringWithFormat:@" %.2f",currentMaxAccelZ]);
+    
 
+}
+-(void)outputRotationData:(CMRotationRate)rotation
+{
+    NSLog(@"x-rotation%@",[NSString stringWithFormat:@" %.2fr/s",rotation.x]);
+    NSLog(@"y-rotation%@",[NSString stringWithFormat:@" %.2fr/s",rotation.y]);
+    NSLog(@"z-rotation%@",[NSString stringWithFormat:@" %.2fr/s",rotation.z]);
+    
+}
 -(void)viewDidDisappear:(BOOL)animated{
     [self.centralManager stopScan];
 }
@@ -73,7 +126,6 @@ typedef struct
 }
 
 #pragma mark - CBCentralManagerDelegate
-
 //Bluetooth handlers
 
 // method called whenever you have successfully connected to the BLE peripheral
