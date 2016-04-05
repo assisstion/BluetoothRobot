@@ -36,7 +36,7 @@ typedef struct
 
 @interface JSViewController () {
 
-}
+}  
 
 @end
 
@@ -56,8 +56,8 @@ typedef struct
     currentMaxRotY = 0;
     currentMaxRotZ = 0;
     self.motionManager = [[CMMotionManager alloc] init];
-    self.motionManager.accelerometerUpdateInterval = .2;
-    self.motionManager.gyroUpdateInterval = .2;
+    self.motionManager.accelerometerUpdateInterval = 1.0;
+    self.motionManager.gyroUpdateInterval = 1.0;
     
     [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
                                              withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {

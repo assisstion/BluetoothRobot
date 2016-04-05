@@ -431,7 +431,7 @@
 				GCC_PREFIX_HEADER = "Controller/JSController-Prefix.pch";
 				INFOPLIST_FILE = "Controller/JSController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.markusfeng;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markusfeng.bluetooth;
 				PRODUCT_NAME = JSController;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -448,7 +448,7 @@
 				GCC_PREFIX_HEADER = "Controller/JSController-Prefix.pch";
 				INFOPLIST_FILE = "Controller/JSController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.markusfeng;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markusfeng.bluetooth;
 				PRODUCT_NAME = JSController;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
